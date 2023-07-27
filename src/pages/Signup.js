@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { BsFillEyeFill } from "react-icons/bs";
+import { toast } from 'react-toastify';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -42,9 +43,10 @@ const Signin = () => {
       formDataCopy.timestamp = serverTimestamp();
       await setDoc(doc(db, "users", user.uid), formDataCopy);
       navigate("/");
-      alert("Signup Success");
+      toast.success("Signup Success");
     } catch (error) {
       console.log(error);
+      toast.error("Something Went Wrong");
     }
   };
 

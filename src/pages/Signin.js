@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { BsFillEyeFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 const Signin = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,10 +31,12 @@ const Signin = () => {
         password
       );
       if (userCredential.user) {
+        toast.success("Login Successful");
         navigate("/profile");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Invalid Email or Password");
     }
   };
   return (
